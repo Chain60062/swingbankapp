@@ -2,16 +2,13 @@ package viniciusmiranda.model;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import lombok.NoArgsConstructor;
 
-@Entity
+@MappedSuperclass
+@NoArgsConstructor
 public abstract class Person implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
     protected String name;
     protected String address;
