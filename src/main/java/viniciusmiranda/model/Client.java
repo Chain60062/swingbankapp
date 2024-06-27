@@ -1,10 +1,24 @@
 package viniciusmiranda.model;
 
-import jakarta.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-public class Client extends Person{
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class Client extends User {
+    public Client(long id, String name, String username, String address, String password, String cpf,
+            String cellphone, UserType userType) {
+        super(id, name, username, address, password, cpf, cellphone, userType);
+    }
+
     private static final long serialVersionUID = 1L;
+    private List<Account> accounts = new ArrayList<>();
     Manager manager;
-    
+
+    public void addAccount(Account account) {
+        accounts.add(account);
+    }
 }

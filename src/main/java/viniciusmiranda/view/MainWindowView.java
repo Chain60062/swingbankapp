@@ -3,11 +3,11 @@ package viniciusmiranda.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginWindowView extends JFrame {
+public class MainWindowView extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    public LoginWindowView() {
+    public MainWindowView() {
         // Set up the frame
         setTitle("Login Window");
         setSize(600, 300);

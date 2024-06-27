@@ -1,11 +1,11 @@
 package viniciusmiranda.model;
 
 public class SavingsAccount extends Account {
-
-    @Override
-    protected double simulateDailyYields() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'simulateDailyYields'");
+    public SavingsAccount(Client accountHolder){
+        super(accountHolder);
     }
     
+    public SavingsAccount(String accountNumber, double balance, double limit, Client accountHolder) {
+        super(accountNumber, balance, limit, accountHolder);
+    }
 }

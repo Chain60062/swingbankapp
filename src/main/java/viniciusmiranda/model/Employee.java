@@ -1,11 +1,17 @@
 package viniciusmiranda.model;
 
-import jakarta.persistence.Entity;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Entity
-@NoArgsConstructor
-public class Employee extends Person{
+@Getter
+@Setter
+public class Employee extends User {
     private static final long serialVersionUID = 1L;
-    private String number;
+    private String employeeNumber;
+
+    public Employee(long id, String name, String username, String address, String password, String cpf,
+            String cellphone, UserType userType, String employeeNumber) {
+        super(id, name, username, address, password, cpf, cellphone, userType);
+        this.employeeNumber = employeeNumber;
+    }
 }

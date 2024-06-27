@@ -3,20 +3,12 @@ package viniciusmiranda.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import lombok.NoArgsConstructor;
-
-@Entity
-@NoArgsConstructor
 public class Manager extends Employee {
+    public Manager(Long id, String name, String username, String address, String password, String cpf,
+            String cellphone, UserType userType, String employeeNumber) {
+        super(id, name, username, address, password, cpf, cellphone, userType, employeeNumber);
+    }
+
     private static final long serialVersionUID = 1L;
-    private List<Person> clients = new ArrayList<>();
-
-    public void registerNewClient(){
-
-    }
-
-    public void registerNewClientAccount(){
-
-    }
+    private List<User> clients = new ArrayList<>();
 }
