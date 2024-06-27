@@ -19,7 +19,7 @@ public class ClientView extends JFrame {
         var accounts = bank.getLoggedInClient().getAccountNumbersArray();// array de numeros das contas
         setTitle("Escolha uma conta");
         setLayout(new GridLayout(0,1));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(400, 400);
         JList<String> jlst = new JList<>(accounts);
         // list selection mode single-selection.

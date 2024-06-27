@@ -13,14 +13,14 @@ public abstract class Account {
     protected double limit;
     protected Client accountHolder;
     private final Random random = new Random();
-
+    //numero da conta aleatorio
     protected Account(Client accountHolder) {
         this.accountHolder = accountHolder;
         this.accountNumber = String.valueOf(100000000 + random.nextInt(900000000));
         balance = 0.0;
         limit = 1000;
     }
-
+    //numero da conta já conhecido(para carregar na lista de contas)
     protected Account(String accountNumber, double balance, double limit, Client accountHolder) {
         this.accountNumber = accountNumber;
         this.balance = balance;

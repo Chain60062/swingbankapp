@@ -1,6 +1,7 @@
 package viniciusmiranda.controller;
 
 import lombok.NoArgsConstructor;
+import viniciusmiranda.model.Bank;
 import viniciusmiranda.model.Client;
 import viniciusmiranda.model.UserType;
 import viniciusmiranda.services.AccountService;
@@ -10,6 +11,7 @@ import viniciusmiranda.services.UserService;
 public class ManagerController {
     AccountService accountService = new AccountService();
     UserService userService = new UserService();
+    Bank bank = Bank.getInstance();
 
     public void registerNewClient(String name, String username, String password, String cpf,
             String address, String cellphone) {
@@ -18,7 +20,7 @@ public class ManagerController {
                 
     }
 
-    public void registerNewClientAccount(long clientId) {
-
+    public void registerNewClientAccountByUsername(String username, double limit, boolean isSavings) {
+        accountService.addAccount(bank.getClientByUsername(username), limit, isSavings);
     }
 }

@@ -16,7 +16,7 @@ public class Bank {
     Client loggedInClient;
     boolean isUserLoggedIn;
     String test;
-    
+
     public Bank() {
         clients = new ArrayList<>();
         accounts = new ArrayList<>();
@@ -32,6 +32,7 @@ public class Bank {
     public void addClient(Client client) {
         clients.add(client);
     }
+
     public void addAccount(Account account) {
         accounts.add(account);
     }
@@ -45,10 +46,19 @@ public class Bank {
         return null;
     }
 
+    public Client getClientByUsername(String username) {
+        for (var client : clients) {
+            if (client.getUsername().equals(username)) {
+                return client;
+            }
+        }
+        return null;
+    }
+
     public void deleteClient(long clientId) {
         clients.removeIf(u -> u.getId() == clientId);
     }
-    
+
     public String[] getUsernamesArray() {
         String[] array = new String[clients.size()];
 
@@ -57,4 +67,5 @@ public class Bank {
         }
         return array;
     }
+
 }
