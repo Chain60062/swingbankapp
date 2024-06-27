@@ -21,4 +21,12 @@ public class Client extends User {
     public void addAccount(Account account) {
         accounts.add(account);
     }
+    public String[] getAccountNumbersArray(){
+        String[] array = new String[accounts.size()];
+        
+        for(int i = 0;i < array.length; i++){
+            array[i] = accounts.get(i).accountNumber;
+        }
+        return array;
+    }
 }

@@ -24,15 +24,11 @@ public class ManagerView extends JFrame {
     private JLabel passwordLabel = new JLabel("Senha:");
     private JLabel addressLabel = new JLabel("Endereço:");
     private JLabel cellphoneLabel = new JLabel("Celular:");
-    private ButtonGroup buttonGroup = new ButtonGroup();
-
-    private int userType;//tipo de usuario(gerente, diretor, cliente...)
     private ManagerController managerController = new ManagerController();
 
     public ManagerView() {
-        setTitle("Cadastrar Usuário");
+        setTitle("Cadastrar Cliente");
         setLayout(new GridLayout(0, 2, 12, 4));
-        setUpAccountTypeRadioButtons();
 
         // Create Register button
         registerButton = new JButton("Register");
@@ -55,21 +51,6 @@ public class ManagerView extends JFrame {
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-
-    private void setUpAccountTypeRadioButtons(){
-        // Create radio buttons
-        clientRadioButton = new JRadioButton("Cliente", true);
-        employeeRadioButton = new JRadioButton("Funcionário");
-        managerRadioButton = new JRadioButton("Gerente");
-        directorRadioButton = new JRadioButton("Diretor");
-
-        // Group radio buttons (only one can be selected)
-        buttonGroup = new ButtonGroup();
-        buttonGroup.add(clientRadioButton);
-        buttonGroup.add(employeeRadioButton);
-        buttonGroup.add(managerRadioButton);
-        buttonGroup.add(directorRadioButton);
     }
 
     private void addComponentsToFrame() {

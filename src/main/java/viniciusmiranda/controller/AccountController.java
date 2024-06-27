@@ -5,18 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import viniciusmiranda.db.DB;
-import viniciusmiranda.model.Account;
+import viniciusmiranda.model.*;
 
 public class AccountController {
-    public Account getAccountByAccNumber() {
-        throw new UnsupportedOperationException("Unimplemented method");
+    private Bank bank = Bank.getInstance();
+
+    public Account getAccountByNumber(String accountNumber) {
+        return bank.getAccountByNumber(accountNumber);
     }
 
-    public void withdraw(Account account, double value) throws UnsupportedOperationException {
+    // false caso valor invalido
+    public boolean withdraw(Account account, double value) throws UnsupportedOperationException {
         if (value > account.getBalance())
-            throw new UnsupportedOperationException("Valor maior que saldo disponível.");
+            return false;
 
         updateAccountBalance(account, value, false);
+        return true;
     }
 
     public void deposit(Account account, double value) throws UnsupportedOperationException {
@@ -67,11 +71,10 @@ public class AccountController {
 
     private PreparedStatement updateBalanceStatement(Connection conn, double updatedBalance, String accountNumber)
             throws SQLException {
-        try (PreparedStatement st = conn.prepareStatement("UPDATE account SET balance = ? WHERE account_number = ?")) {
+            PreparedStatement st = conn.prepareStatement("UPDATE account SET balance = ? WHERE account_number = ?");
             st.setDouble(1, updatedBalance);
             st.setString(2, accountNumber);
 
             return st;
         }
-    }
 }

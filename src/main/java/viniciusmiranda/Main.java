@@ -2,6 +2,7 @@ package viniciusmiranda;
 
 import javax.swing.SwingUtilities;
 
+import viniciusmiranda.controller.AccountController;
 import viniciusmiranda.controller.BankController;
 import viniciusmiranda.model.Bank;
 import viniciusmiranda.view.*;
@@ -9,17 +10,12 @@ import viniciusmiranda.view.*;
 public class Main {
     public static void main(String[] args) {
         BankController bankController = new BankController();
-        bankController.loadUsersAndAccounts();
-
+        AccountController accountController = new AccountController();
         Bank bank = Bank.getInstance();
-        System.out.println(bank.getClients().size());
-        for (var client : bank.getClients()) {
-            System.out.println(client.getName() + " possui as contas: " + client.getAccounts());
-        }
+        bankController.loadUsersAndAccounts();
+        bank.setLoggedInClient(bank.getClients().get(0));
 
-        Main2.test();
-        System.out.println(bank.getTest());
         // preencher model com dados do banco de dados
-        SwingUtilities.invokeLater(ClientView::new);
+        SwingUtilities.invokeLater(CreateAccountView::new);
     }
 }

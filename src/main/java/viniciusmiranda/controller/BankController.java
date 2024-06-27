@@ -50,6 +50,7 @@ public class BankController {
                                 account = new SavingsAccount(accountNumber, balance, accountLimit, client);
                             }
                             client.addAccount(account);
+                            bank.addAccount(account);
                         }
                     }
                     bank.addClient(client);
