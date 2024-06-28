@@ -27,6 +27,7 @@ public class AccountOperationsView extends JFrame {
 
     public AccountOperationsView(Account account) {
         this.account = account;
+        balance = accountController.getUpdatedBalance(account.getAccountNumber());
         setTitle("Sua conta");
         setLayout(new GridLayout(0, 2, 12, 4));
         setSize(400, 400);
