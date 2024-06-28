@@ -21,6 +21,9 @@ public class AccountOperationsView extends JFrame {
     private JTextField depositField = new JTextField("0.00");
     private JButton withdrawButton = new JButton("Sacar");
     private JButton depositButton = new JButton("Depositar");
+    private double balance = 0.0;
+    private JLabel balanceValueLabel = new JLabel();
+    private JLabel balanceLabel = new JLabel("Saldo: ");
 
     public AccountOperationsView(Account account) {
         this.account = account;
@@ -28,6 +31,10 @@ public class AccountOperationsView extends JFrame {
         setLayout(new GridLayout(0, 2, 12, 4));
         setSize(400, 400);
         setVisible(true);
+
+        balanceValueLabel.setText(String.valueOf(balance));
+        add(balanceLabel);
+        add(balanceValueLabel);
         add(depositLabel);
         add(depositField);
         add(new JLabel());
@@ -44,6 +51,8 @@ public class AccountOperationsView extends JFrame {
             } else {
                 accountController.deposit(account, Double.parseDouble(value));
                 showMessageDialog(null, "Depósito realizado com sucesso na conta " + account);
+                balance = accountController.getUpdatedBalance(account.getAccountNumber());
+                balanceValueLabel.setText(String.valueOf(balance));
             }
         });
         withdrawButton.addActionListener(ae -> {
@@ -55,8 +64,11 @@ public class AccountOperationsView extends JFrame {
 
                 if (!response)
                     showMessageDialog(null, "Valor de saque excede saldo da conta");
-                else
+                else {
                     showMessageDialog(null, "Saque realizado com sucesso na conta " + account);
+                    balance = accountController.getUpdatedBalance(account.getAccountNumber());
+                    balanceValueLabel.setText(String.valueOf(balance));
+                }
             }
         });
     }

@@ -34,5 +34,4 @@ insert into person(name, username, cipher, address, cpf, cellphone, user_type, e
 values ("gerente","gerente", "123","Morro dos Macacos", "222333344455", "99887777", 3, "498372", null);
 
 insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number, manager_id) 
-values ("cliente","cliente", "123","Morro dos Macacos", "222333344455", "99887777", 1, null, null);
-
+values ("cliente","cliente", "123","Morro dos Macacos", "222333344455", "99887777", 1, null, 2);
