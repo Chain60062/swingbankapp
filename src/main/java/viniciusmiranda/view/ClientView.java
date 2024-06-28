@@ -9,6 +9,7 @@ import viniciusmiranda.controller.AccountController;
 import viniciusmiranda.model.Bank;
 
 public class ClientView extends JFrame {
+    private JButton backButton = new JButton("Sair");
     private Bank bank = Bank.getInstance();
     private AccountController accountController = new AccountController();
     private String accountNumber;
@@ -16,6 +17,7 @@ public class ClientView extends JFrame {
     public ClientView() {
         bank.getLoggedInClient().loadClientAccounts();
         String[] accounts = bank.getLoggedInClient().getAccountNumbersArray();// array de numeros das contas
+
         setTitle("Bem vindo cliente, escolha uma conta");
         setLayout(new GridLayout(0, 1));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,13 +35,18 @@ public class ClientView extends JFrame {
         accountList.addListSelectionListener(le -> {
             accountNumber = accountList.getSelectedValue();
         });
-        confirmButton.addActionListener(ae -> SwingUtilities
-                .invokeLater(() -> new AccountOperationsView(accountController.getAccountByNumber(accountNumber))));
+
         // Add the list and label to the content pane.
         add(scrollPane);
         add(jlab);
         add(confirmButton);
+        add(backButton);
         // Display the frame.
         setVisible(true);
+
+        confirmButton.addActionListener(ae -> SwingUtilities
+                .invokeLater(() -> new AccountOperationsView(accountController.getAccountByNumber(accountNumber))));
+
+        backButton.addActionListener(ae -> System.exit(0));
     }
 }

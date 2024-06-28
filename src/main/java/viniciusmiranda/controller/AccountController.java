@@ -43,36 +43,24 @@ public class AccountController {
     private void updateAccountBalance(Account account, double value, boolean isDeposit) {
         double updatedBalance = isDeposit ? account.getBalance() + value : account.getBalance() - value;
 
-        Connection conn = null;
-        PreparedStatement st = null;
         int rowsAffectedBalance = 0;
         int rowsAffectedTransaction = 0;
 
-        try {
-            conn = DB.getConnection();
+        try (Connection conn = DB.getConnection();
+                PreparedStatement pdst = updateBalanceStatement(conn, updatedBalance, account.getAccountNumber());) {
 
-            st = updateBalanceStatement(conn, updatedBalance, account.getAccountNumber());
-            rowsAffectedBalance = st.executeUpdate();
+            rowsAffectedBalance = pdst.executeUpdate();
 
-            rowsAffectedTransaction = st.executeUpdate();
+            rowsAffectedTransaction = pdst.executeUpdate();
 
             if (rowsAffectedBalance <= 0 || rowsAffectedTransaction <= 0) {
                 conn.rollback();
-                return;
+                throw new SQLException();
             }
 
             account.setBalance(updatedBalance);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                DB.closeStatement(st);
-                DB.closeConnection(conn);
-            } catch (Exception e) {
-                System.err.println("Erro ao fechar recursos. Causado por: " + e.getMessage());
-            }
         }
     }
 

@@ -18,8 +18,6 @@ public class Client extends User {
         super(id, name, username, address, password, cpf, cellphone, userType);
         this.managerId = managerId;
     }
-
-    private static final long serialVersionUID = 1L;
     private List<Account> accounts = new ArrayList<>();
     private Long managerId;
 

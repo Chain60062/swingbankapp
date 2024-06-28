@@ -13,12 +13,10 @@ public class UserService {
     private Bank bank = Bank.getInstance();
 
     public void addUser(User user) {
-        Connection conn = null;
         PreparedStatement st = null;
         ResultSet keys = null;
 
-        try {
-            conn = DB.getConnection();
+        try (Connection conn = DB.getConnection()) {
             if (user instanceof Client) {
                 var client = (Client) user;
                 st = prepareInsertClient(conn, client);
@@ -50,21 +48,16 @@ public class UserService {
                     keys.close();
                 if (st != null)
                     st.close();
-                if (conn != null)
-                    conn.close();
             } catch (SQLException e) {
-                System.err.println("Error closing resources. Caused by: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
 
     public void deleteUser(long userId) {
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DB.getConnection();
 
-            st = conn.prepareStatement("DELETE FROM person WHERE user_id = ?");
+        try (Connection conn = DB.getConnection();
+                PreparedStatement st = conn.prepareStatement("DELETE FROM person WHERE user_id = ?")) {
 
             st.setLong(1, userId);
 
@@ -73,9 +66,6 @@ public class UserService {
             bank.deleteClient(userId);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            DB.closeStatement(st);
-            DB.closeConnection(conn);
         }
     }
 

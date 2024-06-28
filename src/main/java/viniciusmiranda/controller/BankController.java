@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import viniciusmiranda.db.DB;
 import viniciusmiranda.model.*;
+import viniciusmiranda.utils.Logger;
 
 public class BankController {
     private Bank bank = Bank.getInstance();
@@ -56,7 +57,6 @@ public class BankController {
                     }
                     bank.addClient(client);
                 }
-
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

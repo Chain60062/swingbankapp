@@ -1,16 +1,13 @@
 package viniciusmiranda.model;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public abstract class User implements Serializable {
+public abstract class User{
     
-    private static final long serialVersionUID = 1L;
-    public User(Long id, String name, String username, String address, String password, String cpf,
+    protected User(Long id, String name, String username, String address, String password, String cpf,
             String cellphone, UserType userType) {
         this.id = id;
         this.name = name;

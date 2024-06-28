@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Employee extends User {
-    private static final long serialVersionUID = 1L;
     private String employeeNumber;
 
     public Employee(long id, String name, String username, String address, String password, String cpf,

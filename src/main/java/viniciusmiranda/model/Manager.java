@@ -8,7 +8,5 @@ public class Manager extends Employee {
             String cellphone, UserType userType, String employeeNumber) {
         super(id, name, username, address, password, cpf, cellphone, userType, employeeNumber);
     }
-
-    private static final long serialVersionUID = 1L;
     private List<User> clients = new ArrayList<>();
 }

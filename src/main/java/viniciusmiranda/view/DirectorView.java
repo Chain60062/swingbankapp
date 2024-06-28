@@ -57,7 +57,6 @@ public class DirectorView extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         backButton.addActionListener(ae -> System.exit(0));
-
     }
 
     private void addComponentsToFrame() {

@@ -9,6 +9,7 @@ import viniciusmiranda.model.Client;
 import viniciusmiranda.model.UserType;
 import viniciusmiranda.services.AccountService;
 import viniciusmiranda.services.UserService;
+import viniciusmiranda.utils.Logger;
 
 @NoArgsConstructor
 public class ManagerController {
@@ -22,6 +23,8 @@ public class ManagerController {
         o userId final deste cliente, que é gerado normalmente pelo bd.*/
         Client client = new Client((long)0, name, username, address, password, cpf, cellphone, managerId, UserType.CLIENT);
         userService.addUser(client);
+
+        Logger.log("Gerente de id %d cadastrou cliente %s".formatted(managerId, username));
     }
 
     public void registerNewClientAccountByUsername(String username, double limit, boolean isSavings) {

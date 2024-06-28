@@ -7,26 +7,27 @@ import java.sql.SQLException;
 
 import viniciusmiranda.db.DB;
 import viniciusmiranda.model.*;
+import viniciusmiranda.utils.Logger;
 
 public class AuthController {
     Bank bank = Bank.getInstance();
 
     public boolean login(String username, String password) {
+        String sql = "SELECT * FROM person p WHERE username =? AND cipher =?";
+        
+        try (Connection conn = DB.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        try (Connection conn = DB.getConnection()) {
-            String sql = "SELECT * FROM person p WHERE username =? AND cipher =?";
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
 
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, username);
-                pstmt.setString(2, password);
-
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    loadUser(rs);
-                    return true;
-                }
+            try (ResultSet rs = pstmt.executeQuery()) {
+                loadUser(rs);
+                return true;
+                Logger.log("Usuário %s realizou login".formatted(username);
             }
         } catch (Exception e) {
-            System.out.println("Error during login: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
