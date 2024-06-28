@@ -14,7 +14,7 @@ public class DirectorController {
          * passar manager para o JDBC com userID nulo causa nullPointerException, 0 não
          * representa o userId final deste gerente, que é gerado normalmente pelo bd.
          */
-        Manager manager = new Manager((long) 0, name, username, address, password, cpf, cellphone, UserType.DIRECTOR,
+        Manager manager = new Manager((long) 0, name, username, address, password, cpf, cellphone, UserType.MANAGER,
                 null);
         userService.addUser(manager);
         

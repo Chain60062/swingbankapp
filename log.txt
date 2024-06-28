@@ -1,1 +1,10 @@
 [2024-06-28 14:54:39] Gerente de id 2 cadastrou cliente sneed
+[2024-06-28 15:12:12] Usuário diretor realizou login
+[2024-06-28 15:12:34] Um diretor cadastrou um novo gerente: gerenti
+[2024-06-28 15:13:07] Usuário gerenti realizou login
+[2024-06-28 15:14:25] Usuário diretor realizou login
+[2024-06-28 15:14:41] Um diretor cadastrou um novo gerente: ger
+[2024-06-28 15:14:59] Usuário ger realizou login
+[2024-06-28 15:15:21] Gerente de id 9 cadastrou cliente cli
+[2024-06-28 15:15:55] Usuário cli realizou login
+[2024-06-28 15:16:48] Usuário cli realizou login
