@@ -23,8 +23,8 @@ public class AuthController {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 loadUser(rs);
+                Logger.log("Usuário %s realizou login".formatted(username));
                 return true;
-                Logger.log("Usuário %s realizou login".formatted(username);
             }
         } catch (Exception e) {
             e.printStackTrace();
