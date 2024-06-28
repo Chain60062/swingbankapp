@@ -18,7 +18,9 @@ public class ManagerController {
 
     public void registerNewClient(String name, String username, String password, String cpf,
             String address, Long managerId, String cellphone) {
-        Client client = new Client(null, name, username, address, password, cpf, cellphone, managerId, UserType.CLIENT);
+        /*passar client para o JDBC com userID nulo causa nullPointerException, 0 não representa
+        o userId final deste cliente, que é gerado normalmente pelo bd.*/
+        Client client = new Client((long)0, name, username, address, password, cpf, cellphone, managerId, UserType.CLIENT);
         userService.addUser(client);
     }
 

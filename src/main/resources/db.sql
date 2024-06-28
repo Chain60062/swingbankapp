@@ -26,9 +26,13 @@ CREATE TABLE IF NOT EXISTS person (
 );
 
 alter table account add foreign key (account_holder_id) references person(user_id) on delete cascade;
-insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number, manager_id) values ("tester","test", "1234","Morro dos Macacos", "222333344455", "99887777", 3, null, null);
 
-insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number, manager_id) values ("Vinicius","viniciusogrande", "1234","Morro dos Macacos", "222333344455", "99887777", 1, null, 1);
+insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number, manager_id) 
+values ("diretor","diretor", "123","Morro dos Macacos", "222333344455", "99887777", 4, "590328", null);
 
-insert into account(account_number, balance, account_limit, account_type, account_holder_id) values("182974", 1000, 10000, 1, 1), ("9523958", 2000, 4000, 1, 1);
+insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number, manager_id) 
+values ("gerente","gerente", "123","Morro dos Macacos", "222333344455", "99887777", 3, "498372", null);
+
+insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number, manager_id) 
+values ("cliente","cliente", "123","Morro dos Macacos", "222333344455", "99887777", 1, null, null);
 

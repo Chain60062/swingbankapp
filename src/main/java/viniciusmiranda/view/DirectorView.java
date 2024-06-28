@@ -12,7 +12,6 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class DirectorView extends JFrame {
     private JButton registerButton;
     private JButton backButton;
-    private JButton registerNewAccountButton;
     private JPasswordField passwordField = new JPasswordField();
     private JTextField usernameField = new JTextField();
     private JTextField nameField = new JTextField();
@@ -36,7 +35,6 @@ public class DirectorView extends JFrame {
         // Create Register button
         registerButton = new JButton("Cadastrar");
         backButton = new JButton("Sair");
-        registerNewAccountButton = new JButton("Nova Conta");
 
         // Action listener for Register button
         registerButton.addActionListener(ae -> {
@@ -60,10 +58,6 @@ public class DirectorView extends JFrame {
 
         backButton.addActionListener(ae -> System.exit(0));
 
-        registerNewAccountButton.addActionListener(ae -> {
-            setVisible(false);
-            SwingUtilities.invokeLater(CreateAccountView::new);
-        });
     }
 
     private void addComponentsToFrame() {
@@ -79,7 +73,6 @@ public class DirectorView extends JFrame {
         add(addressField);
         add(cellphoneLabel);
         add(cellphoneField);
-        add(registerNewAccountButton);
         add(backButton);
         add(registerButton);
     }

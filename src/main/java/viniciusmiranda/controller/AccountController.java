@@ -10,6 +10,16 @@ import viniciusmiranda.model.*;
 public class AccountController {
     private Bank bank = Bank.getInstance();
 
+    public double getUpdatedBalance(String accountNumber) {
+        var allAccounts = bank.getAccounts();
+
+        return allAccounts.stream()
+                .filter(account -> account.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .map(Account::getBalance)
+                .orElseThrow(() -> new IllegalArgumentException("Conta não encontrada"));
+    }
+
     public Account getAccountByNumber(String accountNumber) {
         return bank.getAccountByNumber(accountNumber);
     }
@@ -68,10 +78,10 @@ public class AccountController {
 
     private PreparedStatement updateBalanceStatement(Connection conn, double updatedBalance, String accountNumber)
             throws SQLException {
-            PreparedStatement st = conn.prepareStatement("UPDATE account SET balance = ? WHERE account_number = ?");
-            st.setDouble(1, updatedBalance);
-            st.setString(2, accountNumber);
+        PreparedStatement st = conn.prepareStatement("UPDATE account SET balance = ? WHERE account_number = ?");
+        st.setDouble(1, updatedBalance);
+        st.setString(2, accountNumber);
 
-            return st;
-        }
+        return st;
+    }
 }
