@@ -18,9 +18,8 @@ public class ManagerController {
 
     public void registerNewClient(String name, String username, String password, String cpf,
             String address, Long managerId, String cellphone) {
-        Client client = new Client(0, name, username, address, password, cpf, cellphone, managerId, UserType.CLIENT);
+        Client client = new Client(null, name, username, address, password, cpf, cellphone, managerId, UserType.CLIENT);
         userService.addUser(client);
-
     }
 
     public void registerNewClientAccountByUsername(String username, double limit, boolean isSavings) {

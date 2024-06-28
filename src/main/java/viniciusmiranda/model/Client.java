@@ -13,7 +13,7 @@ import viniciusmiranda.db.DB;
 @Getter
 @Setter
 public class Client extends User {
-    public Client(long id, String name, String username, String address, String password, String cpf,
+    public Client(Long id, String name, String username, String address, String password, String cpf,
             String cellphone, Long managerId, UserType userType) {
         super(id, name, username, address, password, cpf, cellphone, userType);
         this.managerId = managerId;

@@ -7,6 +7,8 @@ import javax.swing.*;
 import viniciusmiranda.controller.ManagerController;
 import viniciusmiranda.model.Bank;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class ManagerView extends JFrame {
     private JButton registerButton;
     private JButton backButton;
@@ -48,6 +50,8 @@ public class ManagerView extends JFrame {
             var managerId = bank.getLoggedInUser().getId();
 
             managerController.registerNewClient(name, username, password, cpf, address, managerId, cellphone);
+
+            showMessageDialog(null, "Cliente cadastrado com sucesso.");
         });
 
         addComponentsToFrame();

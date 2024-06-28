@@ -22,12 +22,13 @@ public class AuthController {
 
                 try (ResultSet rs = pstmt.executeQuery()) {
                     loadUser(rs);
+                    return true;
                 }
             }
         } catch (Exception e) {
             System.out.println("Error during login: " + e.getMessage());
+            return false;
         }
-        return true;
     }
 
     public void loadUser(ResultSet rs) {

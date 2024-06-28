@@ -52,35 +52,23 @@ public class MainWindowView extends JFrame {
                 showMessageDialog(null, "Usuário e senha não podem ser nulos.");
             }
             // login
-            var response = authController.login(username, password);
-            // reposta de senha ou usuario invalido
-            if (!response)
-                showMessageDialog(null, "Senha ou usuário incorreto(s).");
-            System.out.println("USER " + bank.getLoggedInUser());
-            System.out.println("CLIENT " + bank.getLoggedInClient());
+            authController.login(username, password);
             // checagem de nivel de acesso
             if (bank.getLoggedInUser() != null) {
                 var user = bank.getLoggedInUser();
-                System.out.println("------------USER----------");
-                System.out.println(user.getUserType());
-                System.out.println(UserType.MANAGER);
-                System.out.println(user.getUserType().equals(UserType.MANAGER));
                 if (user.getUserType().equals(UserType.MANAGER)) {
-                    System.out.println("USUÁRIO É UM GERENTE");
                     setVisible(false);
                     SwingUtilities.invokeLater(ManagerView::new);
                 }
                 if (user.getUserType().equals(UserType.DIRECTOR)) {
-                    System.out.println("USUÁRIO É UM DIRETOR");
                     setVisible(false);
                     SwingUtilities.invokeLater(DirectorView::new);
                 }
             } else if (bank.getLoggedInClient() != null) {
-                System.out.println("USUÁRIO É UM CLIENTE");
                 setVisible(false);
                 SwingUtilities.invokeLater(ClientView::new);
             } else {
-                showMessageDialog(null, "Erro inesperado de login, lamentamos.");
+                showMessageDialog(null, "Senha ou usuário incorreto(s).");
             }
 
         });
