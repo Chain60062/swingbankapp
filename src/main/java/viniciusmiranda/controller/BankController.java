@@ -11,7 +11,7 @@ public class BankController {
     private Bank bank = Bank.getInstance();
 
     public void loadUsersAndAccounts() {
-        String userQuery = "SELECT user_id, name, username, cipher, address, cpf, user_type, cellphone FROM person WHERE user_type = 1";// clientes
+        String userQuery = "SELECT user_id, name, username, cipher, address, cpf, user_type, cellphone, manager_id FROM person WHERE user_type = 1";// clientes
         String accountQuery = "SELECT account_number, balance, account_limit, account_type FROM account WHERE account_holder_id = ?";
 
         try (Connection conn = DB.getConnection();
@@ -29,12 +29,13 @@ public class BankController {
                 var cpf = userRs.getString("cpf");
                 var userType = userRs.getInt("user_type");
                 var cellphone = userRs.getString("cellphone");
+                var managerId = userRs.getLong("manager_id");
 
                 accountStmt.setLong(1, id);
-                //carregar accounts
+                // carregar accounts
                 if (userType == 1) {
                     Client client = new Client(id, name, username, address, password, cpf,
-                            cellphone, UserType.CLIENT);
+                            cellphone, managerId, UserType.CLIENT);
 
                     try (ResultSet accountRs = accountStmt.executeQuery()) {
                         while (accountRs.next()) {

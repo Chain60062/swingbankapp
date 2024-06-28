@@ -43,13 +43,14 @@ public class AuthController {
                 String cpf = rs.getString("cpf");
                 String address = rs.getString("address");
                 String cellphone = rs.getString("cellphone");
+                Long managerId = rs.getLong("manager_id");
                 String employeeNumber = rs.getString("employee_number");
 
                 switch (userType) {
                     case 1:
                         Client client = new Client(id, name,
                                 username, address, password, cpf,
-                                cellphone, UserType.get(userType));
+                                cellphone, managerId, UserType.get(userType));
                         client.setLoggedIn(true);
                         bank.setLoggedInClient(client);
                         break;

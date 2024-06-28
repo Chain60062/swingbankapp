@@ -17,15 +17,17 @@ public class CreateAccountView extends JFrame {
     private ButtonGroup btnGroup = new ButtonGroup();
     private JLabel limitLabel = new JLabel("Limite: ");
     private JTextField limitField = new JTextField("0.00");
-    private JLabel chooseAccLabel = new JLabel("Escolha uma conta");
+    private JLabel chooseAccLabel = new JLabel("Escolha um de seus clientes: ");
+    private JButton backButton = new JButton("Voltar");
     private JList<String> clientList;
     private JScrollPane clientsScrollPane;
     private ManagerController managerController = new ManagerController();
     private Bank bank = Bank.getInstance();
     private String username;
+    private String[] clients;
 
     public CreateAccountView() {
-        var clients = bank.getUsernamesArray();// array de username dos clientes
+        clients = managerController.getClients(bank.getLoggedInUser().getId());
         clientList = new JList<>(clients);
         // list selection mode single-selection.
         clientList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -48,6 +50,10 @@ public class CreateAccountView extends JFrame {
                         savingsAccountRadio.isSelected());
                 showMessageDialog(null, "Nova conta para cliente " + username + " foi criada.");
             }
+        });
+        backButton.addActionListener(ae -> {
+            setVisible(false);
+            SwingUtilities.invokeLater(ManagerView::new);
         });
     }
 
@@ -78,7 +84,7 @@ public class CreateAccountView extends JFrame {
         add(limitField);
         add(chooseAccLabel);
         add(clientsScrollPane);
-        add(new JLabel());
+        add(backButton);
         add(registerButton);
     }
 }

@@ -14,13 +14,14 @@ import viniciusmiranda.db.DB;
 @Setter
 public class Client extends User {
     public Client(long id, String name, String username, String address, String password, String cpf,
-            String cellphone, UserType userType) {
+            String cellphone, Long managerId, UserType userType) {
         super(id, name, username, address, password, cpf, cellphone, userType);
+        this.managerId = managerId;
     }
 
     private static final long serialVersionUID = 1L;
     private List<Account> accounts = new ArrayList<>();
-    Manager manager;
+    private Long managerId;
 
     public void addAccount(Account account) {
         accounts.add(account);
@@ -34,7 +35,7 @@ public class Client extends User {
         }
         return array;
     }
-
+    //gambiarra para explicitamente carregar contas de um cliente especifico
     public void loadClientAccounts() {
         String accountQuery = "SELECT account_number, balance, account_limit, account_type FROM account WHERE account_holder_id = ?";
 

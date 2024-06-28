@@ -5,10 +5,12 @@ import java.awt.GridLayout;
 import javax.swing.*;
 
 import viniciusmiranda.controller.ManagerController;
+import viniciusmiranda.model.Bank;
 
 public class ManagerView extends JFrame {
     private JButton registerButton;
     private JButton backButton;
+    private JButton registerNewAccountButton;
     private JPasswordField passwordField = new JPasswordField();
     private JTextField usernameField = new JTextField();
     private JTextField nameField = new JTextField();
@@ -21,7 +23,9 @@ public class ManagerView extends JFrame {
     private JLabel passwordLabel = new JLabel("Senha:");
     private JLabel addressLabel = new JLabel("Endereço:");
     private JLabel cellphoneLabel = new JLabel("Celular:");
+
     private ManagerController managerController = new ManagerController();
+    private Bank bank = Bank.getInstance();
 
     public ManagerView() {
         setTitle("Cadastrar Cliente");
@@ -29,7 +33,8 @@ public class ManagerView extends JFrame {
 
         // Create Register button
         registerButton = new JButton("Cadastrar");
-        backButton = new JButton("Voltar");
+        backButton = new JButton("Sair");
+        registerNewAccountButton = new JButton("Nova Conta");
 
         // Action listener for Register button
         registerButton.addActionListener(ae -> {
@@ -40,8 +45,9 @@ public class ManagerView extends JFrame {
             var address = addressField.getText();
             var cellphone = cellphoneField.getText();
             var password = new String(passwordField.getPassword());
+            var managerId = bank.getLoggedInUser().getId();
 
-            managerController.registerNewClient(name, username, password, cpf, address, cellphone);
+            managerController.registerNewClient(name, username, password, cpf, address, managerId, cellphone);
         });
 
         addComponentsToFrame();
@@ -49,9 +55,11 @@ public class ManagerView extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        backButton.addActionListener(ae -> {
+        backButton.addActionListener(ae -> System.exit(0));
+
+        registerNewAccountButton.addActionListener(ae -> {
             setVisible(false);
-            SwingUtilities.invokeLater(MainWindowView::new);
+            SwingUtilities.invokeLater(CreateAccountView::new);
         });
     }
 
@@ -68,6 +76,7 @@ public class ManagerView extends JFrame {
         add(addressField);
         add(cellphoneLabel);
         add(cellphoneField);
+        add(registerNewAccountButton);
         add(backButton);
         add(registerButton);
     }
