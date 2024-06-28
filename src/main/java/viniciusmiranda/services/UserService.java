@@ -71,7 +71,6 @@ public class UserService {
             st.executeUpdate();
 
             bank.deleteClient(userId);
-            System.out.println("Conta apagada com sucesso");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

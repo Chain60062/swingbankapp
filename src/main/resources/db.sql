@@ -26,11 +26,9 @@ create table
 
 alter table account add foreign key (account_holder_id) references person(user_id) on delete cascade;
 
-insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number) values ("Vinicius","viniciusogrande", "1234","Morro dos Macacos", "222333344455", "99887777" 1, null);
+insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number) values ("Vinicius","viniciusogrande", "1234","Morro dos Macacos", "222333344455", "99887777", 1, null);
+
+insert into person(name, username, cipher, address, cpf, cellphone, user_type, employee_number) values ("tester","test", "1234","Morro dos Macacos", "222333344455", "99887777", 2, null);
 
 insert into account(account_number, balance, account_limit, account_type, account_holder_id) values("182974", 1000, 10000, 1, 1), ("9523958", 2000, 4000, 1, 1);
 
--- SELECT p.*, ac.*
--- FROM person p 
--- JOIN account ac ON p.user_id = ac.account_holder_id
--- WHERE p.username = "viniciusogrande" AND p.cipher = "1234";

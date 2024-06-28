@@ -1,5 +1,5 @@
 package viniciusmiranda.view;
 
-public class ManagerSelectClient {
+public class ManagerClientList {
     
 }

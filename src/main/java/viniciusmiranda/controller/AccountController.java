@@ -47,14 +47,11 @@ public class AccountController {
             rowsAffectedTransaction = st.executeUpdate();
 
             if (rowsAffectedBalance <= 0 || rowsAffectedTransaction <= 0) {
-                System.out.println("Erro ao atualizar saldo");
                 conn.rollback();
                 return;
             }
 
             account.setBalance(updatedBalance);
-
-            System.out.println("Saldo atualizado com sucesso.");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

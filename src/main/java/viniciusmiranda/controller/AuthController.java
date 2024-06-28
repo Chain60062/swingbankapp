@@ -8,15 +8,16 @@ import java.sql.SQLException;
 import viniciusmiranda.db.DB;
 import viniciusmiranda.model.*;
 
-public class LoginController {
+public class AuthController {
     Bank bank = Bank.getInstance();
-    public boolean login(String name, String password, UserType userType) {
+
+    public boolean login(String username, String password) {
 
         try (Connection conn = DB.getConnection()) {
-            String sql = "SELECT * FROM person p WHERE name =? AND password =? JOIN account a ON ac.account_holder_id = p.user_id";
+            String sql = "SELECT * FROM person p WHERE username =? AND cipher =?";
 
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, name);
+                pstmt.setString(1, username);
                 pstmt.setString(2, password);
 
                 try (ResultSet rs = pstmt.executeQuery()) {
@@ -34,11 +35,8 @@ public class LoginController {
         Account account;
         try {
             while (rs.next()) {
-                long id = rs.getShort("person_id");
-                short accountType = rs.getShort("account_type");
+                long id = rs.getShort("user_id");
                 short userType = rs.getShort("user_type");
-                String accountNumber = rs.getString("account_number");
-                double balance = rs.getDouble("balance");
                 String name = rs.getString("name");
                 String username = rs.getString("username");
                 String password = rs.getString("cipher");
@@ -52,29 +50,25 @@ public class LoginController {
                         Client client = new Client(id, name,
                                 username, address, password, cpf,
                                 cellphone, UserType.get(userType));
-
-                        if (accountType == 1) {
-                            account = new SavingsAccount(client);
-                        } else {
-                            account = new CheckingAccount(client);
-                        }
-                        // vincula conta ao cliente e adiciona cliente a lista de usuarios do bank
-                        client.addAccount(account);
-                        bank.setLoggedInUser(client);
+                        client.setLoggedIn(true);
+                        bank.setLoggedInClient(client);
                         break;
                     case 2:
                         user = new Employee(id, name, username, address, password, cpf, cellphone,
                                 UserType.get(userType), employeeNumber);
+                        user.setLoggedIn(true);
                         bank.setLoggedInUser(user);
                         break;
                     case 3:
                         user = new Manager(id, name, username, address, password, cpf, cellphone,
                                 UserType.get(userType), employeeNumber);
+                        user.setLoggedIn(true);
                         bank.setLoggedInUser(user);
                         break;
                     case 4:
                         user = new Director(id, name, username, address, password, cpf, cellphone,
                                 UserType.get(userType), employeeNumber);
+                        user.setLoggedIn(true);
                         bank.setLoggedInUser(user);
                         break;
                     default:
